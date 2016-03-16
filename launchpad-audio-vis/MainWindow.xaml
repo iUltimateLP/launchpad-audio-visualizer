@@ -1,0 +1,28 @@
+﻿<Controls:MetroWindow 
+    x:Class="launchpad_audio_vis.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:launchpad_audio_vis"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    GlowBrush = "{DynamicResource AccentColorBrush}"
+    BorderThickness ="1"
+    mc:Ignorable="d"
+    Title="Launchpad Audio Visualizer" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="MetroWindow_Closing">
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <ComboBox x:Name="launchpadCombo" SelectedIndex="1" Width="150" Loaded="launchpadCombo_Loaded" SelectionChanged="launchpadCombo_SelectionChanged"  BorderBrush="{x:Null}" Controls:ControlsHelper.FocusBorderBrush="{x:Null}" Controls:ControlsHelper.MouseOverBorderBrush="{x:Null}"/>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+
+    <Canvas Margin="0,0,0,0">
+        <ComboBox x:Name="devicesCombo" Canvas.Left="99" Canvas.Top="10" Width="250"/>
+        <Label x:Name="label" Content="Sound Device:" Canvas.Left="10" Canvas.Top="10"/>
+        <ToggleButton x:Name="enableVis" Canvas.Left="99" Canvas.Top="47" Style="{DynamicResource MaterialDesignSwitchToggleButton}" Checked="enableVis_Checked" Unchecked="enableVis_uncheck"/>
+        <Label x:Name="label1" Content="Enable:" Canvas.Left="46" Canvas.Top="41"/>
+        <local:SoftwareVisualizer x:Name="visualizer" Height="210" Canvas.Left="99" Canvas.Top="74" Width="166"></local:SoftwareVisualizer>
+    </Canvas>
+
+</Controls:MetroWindow>
