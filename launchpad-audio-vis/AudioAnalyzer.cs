@@ -11,6 +11,16 @@ using System.Windows.Threading;
 
 namespace launchpad_audio_vis
 {
+    public static class Helpers
+    {
+        public static T Clamp<T>(this T val, T min, T max) where T : IComparable<T>
+        {
+            if (val.CompareTo(min) < 0) return min;
+            else if (val.CompareTo(max) > 0) return max;
+            else return val;
+        }
+    }
+
     public class AudioAnalyzer
     {
         private Interface _lInt;
@@ -166,7 +176,7 @@ namespace launchpad_audio_vis
                 for (int i = 0; i < 8; i++)
                 {
                     _val = ((float)_spectrumdata[i] / 255) * 8;
-                    _ledY = _val >= 8 ? 7 : _val;
+                    _ledY = _ledY.Clamp(1, 8); //_val >= 8 ? 7 : _val;
 
                     //string color = colorThreshhold.Where(o => o.Key >= _spectrumdata[i]).First().Value;
                     Tuple<float, KeyValuePair<float, string>> bestMatch = null;
@@ -177,18 +187,23 @@ namespace launchpad_audio_vis
                             bestMatch = Tuple.Create(dif, item);
                     }
 
-                    for (int tX = 0; tX < 8; tX++)
+                    for (int tX = 0; tX <= 8; tX++)
                     {
-                        for (int tY = 0; tY < 8; tY++)
+                        for (int tY = 0; tY <= 8; tY++)
                         {
-                            int veloAtThisPoint = leds[tX, tY];
+                            //This flickers for some reason
+                            int _lx = tX.Clamp(1, 8);
+                            int _ly = tY.Clamp(1, 8);
+                            int _ax = tX.Clamp(0, 7);
+                            int _ay = tY.Clamp(0, 7);
+                            int veloAtThisPoint = leds[_ax, _ay];
                             if (tX == i+1 && tY == 8-(int)_ledY)
                             {
                                 //if (veloAtThisPoint != colors[bestMatch.Item2.Value])
                                 //{
-                                    _lInt.fillLEDs(tX+1, 8 - (int)_ledY, tX+1, 8, colors[bestMatch.Item2.Value]);
-                                    _lInt.fillLEDs(tX+1, 1, tX+1, 8-(int)_ledY, 0);
-                                    leds[tX, tY] = colors[bestMatch.Item2.Value];
+                                    _lInt.fillLEDs(_lx, 8 - (int)_ledY, _lx, 8, colors[bestMatch.Item2.Value]);
+                                    _lInt.fillLEDs(_lx, 1, _lx, 8-(int)_ledY, 0);
+                                    leds[_ax, _ay] = colors[bestMatch.Item2.Value];
                                 //}
                             }
                         }
