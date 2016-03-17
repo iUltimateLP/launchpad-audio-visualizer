@@ -177,24 +177,19 @@ namespace launchpad_audio_vis
                             bestMatch = Tuple.Create(dif, item);
                     }
 
-                    for (int tX = 0; tX < 8; tX++)
+                    for (int tX = 1; tX <= 8; tX++)
                     {
-                        for (int tY = 0; tY < 8; tY++)
+                        for (int tY = 1; tY <= 8; tY++)
                         {
-                            int veloAtThisPoint = leds[tX, tY];
+                            int veloAtThisPoint = leds[tX-1, tY-1];
                             if (tX == i+1 && tY == 8-(int)_ledY)
                             {
-                                //if (veloAtThisPoint != colors[bestMatch.Item2.Value])
-                                //{
-                                    _lInt.fillLEDs(tX, 8 - (int)_ledY, tX, 8, colors[bestMatch.Item2.Value]);
-                                    _lInt.fillLEDs(tX, 1, tX, 8-(int)_ledY, 0);
-                                    leds[tX, tY] = colors[bestMatch.Item2.Value];
-                                //}
+                                _lInt.fillLEDs(tX, 8 - (int)_ledY, tX, 8, colors[bestMatch.Item2.Value]);
+                                _lInt.fillLEDs(tX, 1, tX, 8 - (int)_ledY, 0);
+                                leds[tX - 1, tY - 1] = colors[bestMatch.Item2.Value];
                             }
                         }
                     }
-
-                    //_lInt.fillLEDs(i + 1, 8 - (int)_ledY, i + 1, 8, colors[bestMatch.Item2.Value]);
                 }
             }
 
