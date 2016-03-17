@@ -14,17 +14,33 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using LaunchpadNET;
+using System.Windows.Media.Effects;
+using System.Windows.Media.Animation;
 
 namespace launchpad_audio_vis
 {
     public partial class MainWindow : MetroWindow
     {
         public AudioAnalyzer analyzer;
+        public BlurEffect visBlurEffect;
+        public DoubleAnimation visBlurEffectAnim;
 
         public MainWindow()
         {
             InitializeComponent();
             analyzer = new AudioAnalyzer(this);
+
+            visBlurEffect = new BlurEffect();
+            visBlurEffect.RenderingBias = RenderingBias.Quality;
+            visBlurEffect.KernelType = KernelType.Gaussian;
+            visBlurEffect.Radius = 0;
+
+            visBlurEffectAnim = new DoubleAnimation();
+            visBlurEffectAnim.From = 0;
+            visBlurEffectAnim.To = 20;
+            visBlurEffectAnim.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+
+            visualizer.Effect = visBlurEffect;
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -82,6 +98,23 @@ namespace launchpad_audio_vis
         private void enableVis_uncheck(object sender, RoutedEventArgs e)
         {
             analyzer.Enable = false;
+        }
+
+        private void enableSoftwareVis_Checked(object sender, RoutedEventArgs e)
+        {
+            analyzer.EnableSoftwareVis(true);
+            visBlurEffectAnim.To = 0;
+            visBlurEffectAnim.From = 20;
+            visualizer.Effect.BeginAnimation(BlurEffect.RadiusProperty, visBlurEffectAnim);
+            visBlurEffectAnim.To = 20;
+            visBlurEffectAnim.From = 0;
+        }
+
+        private void enableSoftwareVis_Unchecked(object sender, RoutedEventArgs e)
+        {
+            analyzer.EnableSoftwareVis(false);
+
+            visualizer.Effect.BeginAnimation(BlurEffect.RadiusProperty, visBlurEffectAnim);
         }
     }
 

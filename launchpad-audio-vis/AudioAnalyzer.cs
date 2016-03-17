@@ -28,6 +28,7 @@ namespace launchpad_audio_vis
         private bool _initialized;
         private int devindex;
         private SoftwareVisualizer _vis;
+        private bool useSoftwareVis;
 
         private float _val;
         private float _ledY;
@@ -69,7 +70,7 @@ namespace launchpad_audio_vis
             _spectrumdata = new List<byte>();
             _vis = inst.visualizer;
             _initialized = false;
-            Init();
+            //Init();
 
             leds = new int[8, 8];
 
@@ -156,7 +157,7 @@ namespace launchpad_audio_vis
             }
 
             //Software Visualization
-            _vis.SetData(_spectrumdata);
+            if (useSoftwareVis) _vis.SetData(_spectrumdata);
 
             //Launchpad Serialization here
             if (_lInt != null)
@@ -254,6 +255,11 @@ namespace launchpad_audio_vis
         public Interface.LaunchpadDevice GetCurrentLaunchpad()
         {
             return _currentLaunchpad;
+        }
+
+        public void EnableSoftwareVis(bool state)
+        {
+            useSoftwareVis = state;
         }
 
         public bool isLaunchpadConnected()

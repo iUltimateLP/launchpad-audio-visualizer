@@ -9,7 +9,7 @@
     GlowBrush = "{DynamicResource AccentColorBrush}"
     BorderThickness ="1"
     mc:Ignorable="d"
-    Title="Launchpad Audio Visualizer" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="MetroWindow_Closing">
+    Title="Launchpad Audio Visualizer" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="MetroWindow_Closing" Background="Black">
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
@@ -22,7 +22,9 @@
         <Label x:Name="label" Content="Sound Device:" Canvas.Left="10" Canvas.Top="10"/>
         <ToggleButton x:Name="enableVis" Canvas.Left="99" Canvas.Top="47" Style="{DynamicResource MaterialDesignSwitchToggleButton}" Checked="enableVis_Checked" Unchecked="enableVis_uncheck"/>
         <Label x:Name="label1" Content="Enable:" Canvas.Left="46" Canvas.Top="41"/>
-        <local:SoftwareVisualizer x:Name="visualizer" Height="210" Canvas.Left="99" Canvas.Top="74" Width="166"></local:SoftwareVisualizer>
+        <local:SoftwareVisualizer x:Name="visualizer" Height="210" Canvas.Left="99" Canvas.Top="72" Width="166"/>
+        <Label x:Name="label1_Copy" Content="Software Visualizer:" Canvas.Left="140" Canvas.Top="41"/>
+        <ToggleButton x:Name="enableSoftwareVis" Canvas.Left="257" Canvas.Top="47" Style="{DynamicResource MaterialDesignSwitchToggleButton}" Checked="enableSoftwareVis_Checked" Unchecked="enableSoftwareVis_Unchecked"/>
     </Canvas>
 
 </Controls:MetroWindow>
