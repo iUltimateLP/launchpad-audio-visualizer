@@ -186,8 +186,8 @@ namespace launchpad_audio_vis
                             {
                                 //if (veloAtThisPoint != colors[bestMatch.Item2.Value])
                                 //{
-                                    _lInt.fillLEDs(tX+1, 8 - (int)_ledY, tX+1, 8, colors[bestMatch.Item2.Value]);
-                                    _lInt.fillLEDs(tX+1, 1, tX+1, 8-(int)_ledY, 0);
+                                    _lInt.fillLEDs(tX, 8 - (int)_ledY, tX, 8, colors[bestMatch.Item2.Value]);
+                                    _lInt.fillLEDs(tX, 1, tX, 8-(int)_ledY, 0);
                                     leds[tX, tY] = colors[bestMatch.Item2.Value];
                                 //}
                             }
