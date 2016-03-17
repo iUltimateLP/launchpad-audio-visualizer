@@ -27,6 +27,11 @@ namespace launchpad_audio_vis
             InitializeComponent();
         }
 
+        public void SetInstance(AudioAnalyzer inst)
+        {
+            _inst = inst;
+        }
+
         public void SetData(List<byte> data)
         {
             if (data.Count < 8) return;

@@ -25,6 +25,12 @@
         <local:SoftwareVisualizer x:Name="visualizer" Height="210" Canvas.Left="99" Canvas.Top="72" Width="166"/>
         <Label x:Name="label1_Copy" Content="Software Visualizer:" Canvas.Left="140" Canvas.Top="41"/>
         <ToggleButton x:Name="enableSoftwareVis" Canvas.Left="257" Canvas.Top="47" Style="{DynamicResource MaterialDesignSwitchToggleButton}" Checked="enableSoftwareVis_Checked" Unchecked="enableSoftwareVis_Unchecked" IsChecked="True"/>
+        <Label x:Name="label2" Content="Created by Jonathan Verbeek a.k.a iUltimateLP - 2016" Canvas.Top="294" Foreground="{DynamicResource AccentColorBrush}" FontFamily="Segoe UI Black" FontSize="16" Canvas.Left="-1">
+            <Label.Effect>
+                <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="10"/>
+            </Label.Effect>
+        </Label>
+        <Controls:DropDownButton x:Name="colorSwitcher" Width="42" Canvas.Left="465" Canvas.Top="283" Loaded="colorSwitcher_Loaded"/>
     </Canvas>
 
 </Controls:MetroWindow>

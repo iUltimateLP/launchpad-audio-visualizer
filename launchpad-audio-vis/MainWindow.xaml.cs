@@ -16,6 +16,9 @@ using MahApps.Metro.Controls;
 using LaunchpadNET;
 using System.Windows.Media.Effects;
 using System.Windows.Media.Animation;
+using MahApps.Metro;
+using MaterialDesignThemes.Wpf;
+using MaterialDesignColors;
 
 namespace launchpad_audio_vis
 {
@@ -41,6 +44,8 @@ namespace launchpad_audio_vis
             visBlurEffectAnim.Duration = new Duration(TimeSpan.FromSeconds(0.2));
 
             visualizer.Effect = visBlurEffect;
+
+            visualizer.SetInstance(analyzer);
         }
 
         private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -120,6 +125,70 @@ namespace launchpad_audio_vis
                 analyzer.EnableSoftwareVis(false);
                 visualizer.Effect.BeginAnimation(BlurEffect.RadiusProperty, visBlurEffectAnim);
             }
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            ThemeManager.ChangeAppStyle(this,
+                ThemeManager.GetAccent("Red"),
+                ThemeManager.GetAppTheme("BaseLight"));
+        }
+
+        private void colorSwitcher_Loaded(object sender, RoutedEventArgs e)
+        {
+            List<Button> btns = new List<Button>();
+
+            /*
+            // This is for MahApps color management
+            foreach (Accent a in ThemeManager.Accents)
+            {
+                var res = a.Resources["AccentColor"]; //Returns hex color
+                if (res != null)
+                {
+                    Rectangle r = new Rectangle();
+                    r.Width = 20;
+                    r.Height = 20;
+                    r.Fill = new SolidColorBrush((Color)res);
+                    r.Name = a.Name;
+                    r.MouseDown += accentMouseDown;
+                    rects.Add(r);
+                }
+            }*/
+
+            //MaterialDesigns color management
+            List<Swatch> swatches = new SwatchesProvider().Swatches.ToList();
+            foreach (Swatch s in swatches)
+            {
+                foreach (Hue h in s.PrimaryHues)
+                {
+                    //Primary50 .. 900 (https://www.google.com/design/spec/style/color.html#color-color-palette)
+                    if (h.Name == "Primary500")
+                    {
+                        Button b = new Button();
+                        b.Width = 20;
+                        b.Height = 20;
+                        b.Background = new SolidColorBrush(h.Color);
+                        b.BorderThickness = new Thickness(0);
+                        b.Name = s.Name;
+                        b.Click += colorButtonClick;
+                        btns.Add(b);
+                    }
+                }
+            }
+
+            colorSwitcher.ItemsSource = btns;
+        }
+
+        private void colorButtonClick(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+
+            /*ThemeManager.ChangeAppStyle(this,
+           ThemeManager.GetAccent(r.Name),
+           ThemeManager.GetAppTheme("BaseDark"));*/
+
+            PaletteHelper h = new PaletteHelper();
+            h.ReplacePrimaryColor(b.Name);
         }
     }
 

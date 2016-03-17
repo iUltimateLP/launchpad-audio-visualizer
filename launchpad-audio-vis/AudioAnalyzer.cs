@@ -175,8 +175,11 @@ namespace launchpad_audio_vis
                             int veloAtThisPoint = leds[tX-1, tY-1];
                             if (tX == i+1 && tY == 8-(int)_ledY)
                             {
-                                _lInt.fillLEDs(tX, 8 - (int)_ledY, tX, 8, v);
-                                _lInt.fillLEDs(tX, 1, tX, 8 - (int)_ledY, 0);
+                                _lInt.fillLEDs(tX, 8 - (int)_ledY, tX, 8, v); //Write Color Track
+                                if (8 - (int)_ledY != 8 && 8 - (int)_ledY != 1) //Write it only if it is not 8th or 1st LED (which causes flickering)
+                                {
+                                    _lInt.fillLEDs(tX, 1, tX, 8 - (int)_ledY, 0); //Write zero track (inverse of color track)
+                                }
                                 leds[tX - 1, tY - 1] = v;
                             }
                         }
