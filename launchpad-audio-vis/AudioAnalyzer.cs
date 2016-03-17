@@ -162,21 +162,11 @@ namespace launchpad_audio_vis
             //Launchpad Serialization here
             if (_lInt != null)
             {
-                //_lInt.clearAllLEDs();
-
                 for (int i = 0; i < 8; i++)
                 {
                     _val = ((float)_spectrumdata[i] / 255) * 8;
                     _ledY = _val >= 8 ? 7 : _val;
-
-                    //string color = colorThreshhold.Where(o => o.Key >= _spectrumdata[i]).First().Value;
-                    Tuple<float, KeyValuePair<float, string>> bestMatch = null;
-                    foreach (var item in colorThreshhold)
-                    {
-                        var dif = Math.Abs(item.Key - _spectrumdata[i]);
-                        if (bestMatch == null || dif < bestMatch.Item1)
-                            bestMatch = Tuple.Create(dif, item);
-                    }
+                    int v = GetVelocityForVolume(_spectrumdata[i]);
 
                     for (int tX = 1; tX <= 8; tX++)
                     {
@@ -185,9 +175,9 @@ namespace launchpad_audio_vis
                             int veloAtThisPoint = leds[tX-1, tY-1];
                             if (tX == i+1 && tY == 8-(int)_ledY)
                             {
-                                _lInt.fillLEDs(tX, 8 - (int)_ledY, tX, 8, colors[bestMatch.Item2.Value]);
+                                _lInt.fillLEDs(tX, 8 - (int)_ledY, tX, 8, v);
                                 _lInt.fillLEDs(tX, 1, tX, 8 - (int)_ledY, 0);
-                                leds[tX - 1, tY - 1] = colors[bestMatch.Item2.Value];
+                                leds[tX - 1, tY - 1] = v;
                             }
                         }
                     }
@@ -275,6 +265,18 @@ namespace launchpad_audio_vis
                 _lInt.clearAllLEDs();
                 _lInt.disconnect(_currentLaunchpad);
             }
+        }
+
+        public int GetVelocityForVolume(int volume)
+        {
+            Tuple<float, KeyValuePair<float, string>> bestMatch = null;
+            foreach (var item in colorThreshhold)
+            {
+                var dif = Math.Abs(item.Key - volume);
+                if (bestMatch == null || dif < bestMatch.Item1)
+                    bestMatch = Tuple.Create(dif, item);
+            }
+            return colors[bestMatch.Item2.Value];
         }
     }
 }

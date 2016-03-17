@@ -102,19 +102,24 @@ namespace launchpad_audio_vis
 
         private void enableSoftwareVis_Checked(object sender, RoutedEventArgs e)
         {
-            analyzer.EnableSoftwareVis(true);
-            visBlurEffectAnim.To = 0;
-            visBlurEffectAnim.From = 20;
-            visualizer.Effect.BeginAnimation(BlurEffect.RadiusProperty, visBlurEffectAnim);
-            visBlurEffectAnim.To = 20;
-            visBlurEffectAnim.From = 0;
+            if (analyzer != null)
+            {
+                analyzer.EnableSoftwareVis(true);
+                visBlurEffectAnim.To = 0;
+                visBlurEffectAnim.From = 20;
+                visualizer.Effect.BeginAnimation(BlurEffect.RadiusProperty, visBlurEffectAnim);
+                visBlurEffectAnim.To = 20;
+                visBlurEffectAnim.From = 0;
+            }
         }
 
         private void enableSoftwareVis_Unchecked(object sender, RoutedEventArgs e)
         {
-            analyzer.EnableSoftwareVis(false);
-
-            visualizer.Effect.BeginAnimation(BlurEffect.RadiusProperty, visBlurEffectAnim);
+            if (analyzer != null)
+            {
+                analyzer.EnableSoftwareVis(false);
+                visualizer.Effect.BeginAnimation(BlurEffect.RadiusProperty, visBlurEffectAnim);
+            }
         }
     }
 

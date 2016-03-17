@@ -20,6 +20,8 @@ namespace launchpad_audio_vis
     /// </summary>
     public partial class SoftwareVisualizer : UserControl
     {
+        private AudioAnalyzer _inst;
+
         public SoftwareVisualizer()
         {
             InitializeComponent();
