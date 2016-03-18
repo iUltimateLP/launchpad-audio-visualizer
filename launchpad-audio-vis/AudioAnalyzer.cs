@@ -40,7 +40,7 @@ namespace launchpad_audio_vis
         private bool _initialized;
         private int devindex;
         private SoftwareVisualizer _vis;
-        private bool useSoftwareVis;
+        private bool useSoftwareVis = true;
         private List<AudioDevice> devices;
 
         private float _val;
