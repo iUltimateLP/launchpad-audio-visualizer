@@ -190,6 +190,11 @@ namespace launchpad_audio_vis
             PaletteHelper h = new PaletteHelper();
             h.ReplacePrimaryColor(b.Name);
         }
+
+        private void refreshClick(object sender, RoutedEventArgs e)
+        {
+            analyzer.UpdateDevices();
+        }
     }
 
 }

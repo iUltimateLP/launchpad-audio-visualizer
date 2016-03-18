@@ -9,7 +9,7 @@
     GlowBrush = "{DynamicResource AccentColorBrush}"
     BorderThickness ="1"
     mc:Ignorable="d"
-    Title="Launchpad Audio Visualizer" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="MetroWindow_Closing">
+    Title="Launchpad Audio Visualizer" Height="350" Width="525" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" Closing="MetroWindow_Closing" Icon="Resources/icon.ico">
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
@@ -30,7 +30,8 @@
                 <DropShadowEffect Direction="0" ShadowDepth="0" BlurRadius="10"/>
             </Label.Effect>
         </Label>
-        <Controls:DropDownButton x:Name="colorSwitcher" Width="42" Canvas.Left="465" Canvas.Top="283" Loaded="colorSwitcher_Loaded"/>
+        <Controls:DropDownButton x:Name="colorSwitcher" Width="42" Canvas.Left="479" Canvas.Top="291" Loaded="colorSwitcher_Loaded"/>
+        <Button x:Name="refresh" Content="Refresh" Canvas.Left="355" Canvas.Top="10" Width="80" Height="26" BorderThickness="1" Click="refreshClick" ToolTip=""/>
     </Canvas>
 
 </Controls:MetroWindow>

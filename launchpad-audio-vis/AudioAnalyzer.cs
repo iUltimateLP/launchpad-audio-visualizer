@@ -11,6 +11,18 @@ using System.Windows.Threading;
 
 namespace launchpad_audio_vis
 {
+    public struct AudioDevice
+    {
+        public string m_deviceName;
+        public int m_deviceID;
+
+        public AudioDevice(string name, int id)
+        {
+            m_deviceName = name;
+            m_deviceID = id;
+        }
+    }
+
     public class AudioAnalyzer
     {
         private Interface _lInt;
@@ -29,6 +41,7 @@ namespace launchpad_audio_vis
         private int devindex;
         private SoftwareVisualizer _vis;
         private bool useSoftwareVis;
+        private List<AudioDevice> devices;
 
         private float _val;
         private float _ledY;
@@ -70,7 +83,8 @@ namespace launchpad_audio_vis
             _spectrumdata = new List<byte>();
             _vis = inst.visualizer;
             _initialized = false;
-            //Init();
+            devices = new List<AudioDevice>();
+            Init();
 
             leds = new int[8, 8];
 
@@ -93,8 +107,7 @@ namespace launchpad_audio_vis
                 {
                     if (!_initialized)
                     {
-                        var array = (windowInst.devicesCombo.Items[windowInst.devicesCombo.SelectedIndex] as string).Split(' ');
-                        devindex = Convert.ToInt32(array[0]);
+                        devindex = devices.ElementAt(windowInst.devicesCombo.SelectedIndex).m_deviceID;
                         bool result = BassWasapi.BASS_WASAPI_Init(devindex, 0, 0, BASSWASAPIInit.BASS_WASAPI_BUFFER, 1f, 0.05f, _process, IntPtr.Zero);
                         if (!result)
                         {
@@ -109,23 +122,58 @@ namespace launchpad_audio_vis
                     }
                     BassWasapi.BASS_WASAPI_Start();
                 }
-                else BassWasapi.BASS_WASAPI_Stop(true);
+                else
+                {
+                    BassWasapi.BASS_WASAPI_Stop(true);
+                    windowInst.devicesCombo.IsEnabled = true;
+                }
                 System.Threading.Thread.Sleep(500);
                 _t.IsEnabled = value;
             }
         }
 
+        public void UpdateDevices()
+        {
+            windowInst.devicesCombo.Items.Clear();
+            devices.Clear();
+            BASS_WASAPI_DEVICEINFO info;
+            for (int i = 1; (info = BassWasapi.BASS_WASAPI_GetDeviceInfo(i)) != null; i++)
+            {
+                if (info.IsEnabled && info.IsLoopback)
+                {
+                    AudioDevice d = new AudioDevice(info.name, i);
+                    devices.Add(d);
+                    windowInst.devicesCombo.Items.Add(string.Format("{0} (ID: {1})", d.m_deviceName, d.m_deviceID));
+                }
+            }
+            windowInst.devicesCombo.SelectedIndex = 0;
+        }
+
         private void Init()
         {
             bool result = false;
-            for (int i = 0; i < BassWasapi.BASS_WASAPI_GetDeviceCount(); i++)
+
+            //Old code takes years to find devices (because he cycles through devices that aren't even attached)
+            /*for (int i = 0; i < BassWasapi.BASS_WASAPI_GetDeviceCount(); i++)
             {
                 var device = BassWasapi.BASS_WASAPI_GetDeviceInfo(i);
                 if (device.IsEnabled && device.IsLoopback)
                 {
                     windowInst.devicesCombo.Items.Add(string.Format("{0} - {1}", i, device.name));
                 }
+            }*/
+
+            BASS_WASAPI_DEVICEINFO info;
+            for (int i = 1; (info = BassWasapi.BASS_WASAPI_GetDeviceInfo(i)) != null; i++)
+            {
+                if (info.IsEnabled && info.IsLoopback)
+                {
+                    AudioDevice d = new AudioDevice(info.name, i);
+                    devices.Add(d);
+                    windowInst.devicesCombo.Items.Add(string.Format("{0} (ID: {1})", d.m_deviceName, d.m_deviceID));
+                }
             }
+
             windowInst.devicesCombo.SelectedIndex = 0;
             Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_UPDATEPERIOD, false);
             result = Bass.BASS_Init(0, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
