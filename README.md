@@ -2,7 +2,7 @@
 Show a really nice visualizing effect on your Launchpad.   
 **Note: this works only with Launchpad MK2 at the moment because I don't have another model. Sorry :(**
 
-### Made possible by this awesome guys:  
+### Made possible by these awesome guys:  
  + BASS by [Un4Seen](http://www.un4seen.com/)
  + BASS.NET by [Bernd Niedergesaess](http://bass.radio42.com/)
  + MahApps by [these awesome people](http://mahapps.com/about/)
