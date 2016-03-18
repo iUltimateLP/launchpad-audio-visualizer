@@ -8,6 +8,9 @@ using System.Windows.Forms;
 using Un4seen.Bass;
 using Un4seen.BassWasapi;
 using System.Windows.Threading;
+using System.IO;
+using System.Threading;
+using System.Reflection;
 
 namespace launchpad_audio_vis
 {
@@ -126,8 +129,10 @@ namespace launchpad_audio_vis
                 {
                     BassWasapi.BASS_WASAPI_Stop(true);
                     windowInst.devicesCombo.IsEnabled = true;
+                    BassWasapi.BASS_WASAPI_Free();
+                    _initialized = false;
                 }
-                System.Threading.Thread.Sleep(500);
+                Thread.Sleep(500);
                 _t.IsEnabled = value;
             }
         }
@@ -274,7 +279,7 @@ namespace launchpad_audio_vis
             if (_lInt.connect(_currentLaunchpad))
             {
                 _lInt.clearAllLEDs();
-                //_lInt.createTextScroll("Connected", 8, false, 127);
+                _lInt.createTextScroll("Connected", 8, false, 3);
             }
             else
             {
