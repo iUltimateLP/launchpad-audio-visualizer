@@ -73,7 +73,7 @@ namespace launchpad_audio_vis
         {
             windowInst = inst;
 
-            
+            //BassNet.Registration("youremail", "yourregkey"); //Enter your data here!
 
             _lInt = new Interface();
 
