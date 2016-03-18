@@ -7,12 +7,12 @@ using System.Windows;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die einer Assembly zugeordnet sind.
-[assembly: AssemblyTitle("launchpad-audio-vis")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Launchpad Audio Visualizer")]
+[assembly: AssemblyDescription("Show nice visualizations on your Launchpad!")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("iUltimateLP")]
 [assembly: AssemblyProduct("launchpad-audio-vis")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyCopyright("MIT license (iUltimateLP @ GitHub)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
