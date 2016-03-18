@@ -19,6 +19,8 @@ using System.Windows.Media.Animation;
 using MahApps.Metro;
 using MaterialDesignThemes.Wpf;
 using MaterialDesignColors;
+using MahApps.Metro.Controls.Dialogs;
+using System.Diagnostics;
 
 namespace launchpad_audio_vis
 {
@@ -194,6 +196,12 @@ namespace launchpad_audio_vis
         private void refreshClick(object sender, RoutedEventArgs e)
         {
             analyzer.UpdateDevices();
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
     }
 

@@ -127,6 +127,7 @@ namespace launchpad_audio_vis
                 }
                 else
                 {
+                    _lInt.clearAllLEDs();
                     BassWasapi.BASS_WASAPI_Stop(true);
                     windowInst.devicesCombo.IsEnabled = true;
                     BassWasapi.BASS_WASAPI_Free();
