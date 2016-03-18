@@ -73,6 +73,8 @@ namespace launchpad_audio_vis
         {
             windowInst = inst;
 
+            
+
             _lInt = new Interface();
 
             _fft = new float[1024];

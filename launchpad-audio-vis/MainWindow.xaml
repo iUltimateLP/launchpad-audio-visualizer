@@ -29,7 +29,7 @@
         <ToggleButton x:Name="enableSoftwareVis" Canvas.Left="257" Canvas.Top="47" Style="{DynamicResource MaterialDesignSwitchToggleButton}" Checked="enableSoftwareVis_Checked" Unchecked="enableSoftwareVis_Unchecked" IsChecked="True"/>
         <Controls:DropDownButton x:Name="colorSwitcher" Width="42" Canvas.Left="522" Canvas.Top="291" Loaded="colorSwitcher_Loaded"/>
         <Button x:Name="refresh" Content="Refresh" Canvas.Left="355" Canvas.Top="10" Width="80" Height="26" BorderThickness="1" Click="refreshClick" ToolTip=""/>
-        <materialDesign:DialogHost Width="569.2" Height="320">
+        <materialDesign:DialogHost Width="569.2" Height="320" Background="{DynamicResource AccentColorBrush}">
             <materialDesign:DialogHost.DialogContent>
                 <StackPanel Margin="16">
                     <TextBlock FontWeight="Bold">Launchpad Audio Visualizer</TextBlock>
