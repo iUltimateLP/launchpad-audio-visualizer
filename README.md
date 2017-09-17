@@ -1,6 +1,8 @@
 # Launchpad Audio Visualizer 4 Launchpad MINI    
 Show a really nice visualizing effect on your Launchpad.   
 **Note: I added support for Launchpad MINI
+I used datasheep from here
+https://github.com/Granjow/launchpad-mini/blob/master/doc/launchpad-programmers-reference.pdf
 
 ### Made possible by these awesome guys:  
  + BASS by [Un4Seen](http://www.un4seen.com/)
