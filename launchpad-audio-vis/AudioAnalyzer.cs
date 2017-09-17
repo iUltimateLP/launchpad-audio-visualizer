@@ -78,10 +78,12 @@ namespace launchpad_audio_vis
         };*/
 
         private Dictionary<float, string> colorThreshhold = new Dictionary<float, string> {
-            {10, "Red"},
-            {40, "Amber"},
-            {50, "Yellow"},
-            {80, "Green"},
+            {15, "Red"},
+            {25, "Amber"},
+            {30, "Yellow"},
+            {60, "GreenLow"},
+             {70, "RedLow"},
+            {100, "Green"},
         };
 
         private int[,] leds;
