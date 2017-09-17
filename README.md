@@ -1,4 +1,4 @@
-# Launchpad Audio Visualizer    
+# Launchpad Audio Visualizer 4 Launchpad MINI    
 Show a really nice visualizing effect on your Launchpad.   
 **Note: I added support for Launchpad MINI
 
