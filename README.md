@@ -1,6 +1,6 @@
 # Launchpad Audio Visualizer    
 Show a really nice visualizing effect on your Launchpad.   
-**Note: this works only with Launchpad MK2 at the moment because I don't have another model. Sorry :(**
+**Note: I added support for Launchpad MINI
 
 ### Made possible by these awesome guys:  
  + BASS by [Un4Seen](http://www.un4seen.com/)
