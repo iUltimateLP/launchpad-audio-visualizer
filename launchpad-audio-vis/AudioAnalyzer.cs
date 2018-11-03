@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -49,7 +49,7 @@ namespace launchpad_audio_vis
         private float _val;
         private float _ledY;
 
-        private Dictionary<string, int> colors = new Dictionary<string, int> {
+        /*private Dictionary<string, int> colors = new Dictionary<string, int> {
             {"Red", 72},
             {"Green", 63},
             {"Yellow", 13},
@@ -58,13 +58,32 @@ namespace launchpad_audio_vis
             {"LightBlue", 36},
             {"White", 3},
             {"Lime", 17}
+        };*/
+        private Dictionary<string, int> colors = new Dictionary<string, int> {
+            {"Off", 12},
+            {"RedLow", 13},
+            {"Red", 15},
+            {"AmberLow", 29},
+            {"Amber", 63},
+            {"Yellow", 62},
+            {"GreenLow", 28},
+            {"Green", 60}
         };
-        private Dictionary<float, string> colorThreshhold = new Dictionary<float, string> {
+        /*private Dictionary<float, string> colorThreshhold = new Dictionary<float, string> {
             {30, "Lime"},
             {90, "Green"},
             {130, "Yellow"},
             {180, "Orange"},
             {220, "Red"}
+        };*/
+
+        private Dictionary<float, string> colorThreshhold = new Dictionary<float, string> {
+            {15, "Red"},
+            {25, "Amber"},
+            {30, "Yellow"},
+            {60, "GreenLow"},
+             {70, "RedLow"},
+            {100, "Green"},
         };
 
         private int[,] leds;
@@ -91,11 +110,11 @@ namespace launchpad_audio_vis
             devices = new List<AudioDevice>();
             Init();
 
-            leds = new int[8, 8];
+            leds = new int[9, 9];
 
-            for (int x = 0; x < 8; x++)
+            for (int x = 0; x < 9; x++)
             {
-                for (int y = 0; y < 8; y++)
+                for (int y = 0; y < 9; y++)
                 {
                     leds[x, y] = 0;
                 }
